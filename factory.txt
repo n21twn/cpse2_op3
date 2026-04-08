@@ -1,0 +1,9 @@
+(383,228) RECTANGLE blue (483,278)
+(964,440) CIRCLE black 120
+(593,343) LINE yellow (693,443)
+(268,633) CIRCLE green 70
+(352,112) RECTANGLE white (752,162)
+(283,128) LINE cyan (65,406)
+(538,395) CIRCLE magenta 50
+(777,154) RECTANGLE red (977,304)
+(277,516) PICTURE C:\Users\nickt\OneDrive\Afbeeldingen\Coin.png

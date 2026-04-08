@@ -1,0 +1,27 @@
+.vs/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+*.user
+*.aps
+*.exe
+*.pdb
+*.ilk
+*.log
+
+## SFML / Compileer bestanden
+*.obj
+*.lib
+*.dll
+*.exp
+
+## Visual Studio database en cache
+*.sdf
+*.opensdf
+*.ipch
+*.db
+*.opendb
+
+## Overig
+.DS_Store
