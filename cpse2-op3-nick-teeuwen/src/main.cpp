@@ -57,23 +57,23 @@ int main() {
         fontLoaded = font.loadFromFile("C:/Windows/Fonts/segoeui.ttf");
 
     std::vector<std::unique_ptr<ScreenObject>> objects;
-    bool        fileError    = false;
+    bool fileError    = false;
     std::string errorMessage;
 
     try {
         objects = loadFromFile(FILENAME);
     }
     catch (const std::exception& e) {
-        fileError    = true;
+        fileError = true;
         errorMessage = e.what();
         std::cerr << "ERROR: " << errorMessage << "\n";
     }
 
-    ScreenObject* dragging   = nullptr;
+	ScreenObject* dragging = nullptr; //pointer naar huidige object dat gesleept wordt, nullptr als er geen object gesleept wordt
     sf::Vector2f  dragOffset = {};
     bool          isDragging = false;
 
-    // SFML 2 event loop
+    // Event loop 
     sf::Event event;
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
@@ -98,13 +98,15 @@ int main() {
                 sf::Vector2f mousePos((float)event.mouseButton.x,
                                       (float)event.mouseButton.y);
 
-                ScreenObject* hit = nullptr;
-                for (auto& obj : objects)
-                    if (obj->contains(mousePos))
-                        hit = obj.get();
+                ScreenObject* hit = nullptr; //pointer naar huidige object dat geselecteerd wordt, nullptr als er geen object geselecteerd wordt
+				for (auto& obj : objects) // referentie gebruiken zodat we de objecten kunnen aanpassen (selecteren) zonder ze te hoeven kopieren
+                    if (obj->contains(mousePos)) // obj -> pakt functie van het object.
+						hit = obj.get(); // als er meerdere objecten op dezelfde plek liggen, wordt het laatste object in de lijst geselecteerd 
 
                 if (hit) {
-                    for (auto& obj : objects) obj->setSelected(false);
+                    for (auto& obj : objects) 
+                        obj->setSelected(false);
+
                     hit->setSelected(true);
                     dragging   = hit;
                     dragOffset = mousePos - hit->getPosition();
@@ -131,7 +133,7 @@ int main() {
 				newPos.x = std::max(0.f, std::min(newPos.x, (float)WIN_W)); //begren dat het object niet buiten het venster kan worden gesleept
                 newPos.y = std::max(0.f, std::min(newPos.y, (float)WIN_H));
 
-                dragging->move(newPos - dragging->getPosition());
+				dragging->move(newPos - dragging->getPosition()); // berekend verschil tussen nieuwe positie en huidige positie en verplaats het object met dat verschil (move functie van het object)
             }
 
             //Toetsenbord: Escape deselecteert alles 
@@ -144,7 +146,6 @@ int main() {
             }
         }
 
-        // Render
         window.clear(sf::Color(50, 50, 50));
 
         if (fileError) {

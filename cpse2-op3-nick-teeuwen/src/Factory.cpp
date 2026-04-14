@@ -24,10 +24,11 @@ std::unique_ptr<ScreenObject> createObject(
         sf::Color color = parseColor(rest[0], lineNum);
         float diam;
         try { diam = std::stof(rest[1]); } // convert string to float 
-        catch (...) { throw ParseError(lineNum, "Invalid diameter: '" + rest[1] + "'"); }
+        catch (...) { // vang alle exception op 
+            throw ParseError(lineNum, "Invalid diameter: '" + rest[1] + "'"); }
         if (diam <= 0)
             throw ParseError(lineNum, "Diameter must be positive");
-        return std::make_unique<Circle>(pos, color, diam);
+		return std::make_unique<Circle>(pos, color, diam); // gebruik make_unique om een nieuw object aan te maken van het type Circle en return deze als een unieke pointer naar een ScreenObject
     }
     else if (type == "RECTANGLE") {
         if (rest.size() < 2)
