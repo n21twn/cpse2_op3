@@ -1,9 +1,9 @@
 #pragma once
-
 #include "Circle.hpp"
 #include "Rectangle.hpp"
 #include "Line.hpp"
 #include "Picture.hpp"
+#include "Utils.hpp"
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -20,7 +20,15 @@ std::unique_ptr<ScreenObject> createObject(
     int lineNum
 );
 
-std::vector<std::unique_ptr<ScreenObject>> loadFromFile(const std::string& filename);
 
-void saveToFile(const std::string& filename,
-    const std::vector<std::unique_ptr<ScreenObject>>& objects);
+std::vector<std::unique_ptr<ScreenObject>> loadFromFile( //Newwwww
+    const std::string& filename,
+    std::string& outErrorLog,
+    bool& outHasError
+);
+
+
+void saveToFile( //Newwwww
+    const std::string& filename,
+    const std::vector<std::unique_ptr<ScreenObject>>& objects
+);

@@ -4,17 +4,15 @@
 #include <vector>
 #include <string>
 
-// Relatief pad: factory.txt staat naast de executable (gekopieerd door CMake)
-const std::string FILENAME = "../factory.txt";  
-const unsigned    WIN_W    = 1280;
-const unsigned    WIN_H    = 960; 
+const std::string FILENAME = "../factory.txt"; 
+const unsigned    WIN_W = 1280; // Eigen beeld scherm is 2560x1440 
+const unsigned    WIN_H = 960; // test voorbeeld is 1280x720 
 
 
 void showError(sf::RenderWindow& window, const sf::Font& font,
                       const std::string& message)
 {
-    window.clear(sf::Color(30, 30, 30));
-
+ 
     sf::Text title;
     title.setFont(font);
     title.setString("Error loading factory.txt");
@@ -39,7 +37,6 @@ void showError(sf::RenderWindow& window, const sf::Font& font,
     hint.setPosition(40.f, (float)WIN_H - 60.f);
     window.draw(hint);
 
-    window.display();
 }
 
 int main() {
@@ -48,26 +45,24 @@ int main() {
     window.setFramerateLimit(60);
 
     // Font laden via relatief pad; kopieer arial.ttf naast de exe
-    // of laat CMake het kopieren vanuit de assets/ map
     sf::Font font;
     bool fontLoaded = font.loadFromFile("arial.ttf");
     if (!fontLoaded)
         fontLoaded = font.loadFromFile("C:/Windows/Fonts/arial.ttf");   // Windows fallback
-    if (!fontLoaded)
-        fontLoaded = font.loadFromFile("C:/Windows/Fonts/segoeui.ttf");
 
-    std::vector<std::unique_ptr<ScreenObject>> objects;
-    bool fileError    = false;
-    std::string errorMessage;
 
-    try {
+    std::string errorMessage = "";
+    bool fileError = false;
+	std::vector<std::unique_ptr<ScreenObject>> objects = loadFromFile(FILENAME, errorMessage, fileError); //Newwwww
+
+   /* try {
         objects = loadFromFile(FILENAME);
     }
     catch (const std::exception& e) {
         fileError = true;
         errorMessage = e.what();
         std::cerr << "ERROR: " << errorMessage << "\n";
-    }
+    }*/
 
 	ScreenObject* dragging = nullptr; //pointer naar huidige object dat gesleept wordt, nullptr als er geen object gesleept wordt
     sf::Vector2f  dragOffset = {};
@@ -81,12 +76,8 @@ int main() {
             // window sluiten
             if (event.type == sf::Event::Closed) {
                 if (!fileError) {
-                    try {
-                        saveToFile(FILENAME, objects);
-                    }
-                    catch (const std::exception& e) {
-                        std::cerr << "Save error: " << e.what() << "\n";
-                    }
+
+                    saveToFile(FILENAME, objects);
                 }
                 window.close();
             }
@@ -149,16 +140,12 @@ int main() {
         window.clear(sf::Color(50, 50, 50));
 
         if (fileError) {
-            if (fontLoaded)
-                showError(window, font, errorMessage);
-            else
-                window.clear(sf::Color::Red);
-        }
-        else {
+            showError(window, font, errorMessage); //Newwwww
+        }else {
             for (const auto& obj : objects)
                 obj->draw(window);
         }
-
+        
         window.display();
     }
 

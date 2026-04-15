@@ -25,6 +25,7 @@
     <ClInclude Include="include\Picture.hpp" />
     <ClInclude Include="include\Rectangle.hpp" />
     <ClInclude Include="include\ScreenObjects.hpp" />
+    <ClInclude Include="Utils.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Circle.cpp" />

@@ -54,12 +54,18 @@ std::unique_ptr<ScreenObject> createObject(
     }
 }
 
-std::vector<std::unique_ptr<ScreenObject>> loadFromFile(const std::string& filename) {
-    std::ifstream file(filename);       // open bestand 
-    if (!file.is_open())
-        throw std::runtime_error("Cannot open file: '" + filename + "'");
-
+std::vector<std::unique_ptr<ScreenObject>> loadFromFile(const std::string& filename, std::string& outErrorLog, bool& outHasError) { //Newwwww
+    
     std::vector<std::unique_ptr<ScreenObject>> objects;
+    std::ifstream file(filename);       // open bestand 
+
+    if (!file.is_open())
+        {
+            outHasError = true;
+            outErrorLog = "Bestand niet gevonden: " + filename;
+            return objects;
+        }
+
     std::string line;
     int lineNum = 0;
 
@@ -67,37 +73,48 @@ std::vector<std::unique_ptr<ScreenObject>> loadFromFile(const std::string& filen
         ++lineNum;
         if (line.empty()) continue;     // Legen regels overslaan
 
-        //Regex code: \([^)]*\) -> alles tussen ( en ) als één token  | -> of   \S+ -> een reeks tekens zonder spaties
-        // Reftie https://en.cppreference.com/w/cpp/regex/regex_iterator.html
+        try {
 
-        std::vector<std::string> tokens;
-        std::regex tokenRe(R"(\([^)]*\)|\S+)");
-        auto begin = std::sregex_iterator(line.begin(), line.end(), tokenRe);   // iterat door de matches van de regex
-        auto end = std::sregex_iterator();                                      // eind van de matches en dus leeg
-        for (auto it = begin; it != end; ++it)                                  // Loop door de matches en voeg ze toe aan variable tot gelijk is aan end
-            tokens.push_back(it->str());
+            //Regex code: \([^)]*\) -> alles tussen ( en ) als één token  | -> of   \S+ -> een reeks tekens zonder spaties
+            // Reftie https://en.cppreference.com/w/cpp/regex/regex_iterator.html
 
-        if (tokens.size() < 2)
-            throw ParseError(lineNum, "Incomplete line: '" + line + "'");
+            std::vector<std::string> tokens;
+            std::regex tokenRe(R"(\([^)]*\)|\S+)");
+            auto begin = std::sregex_iterator(line.begin(), line.end(), tokenRe);   // iterat door de matches van de regex
+            auto end = std::sregex_iterator();                                      // eind van de matches en dus leeg
+            for (auto it = begin; it != end; ++it)                                  // Loop door de matches en voeg ze toe aan variable tot gelijk is aan end
+                tokens.push_back(it->str());
 
-        sf::Vector2f pos = parsePoint(tokens[0], lineNum);
-        std::string  type = tokens[1];
-        std::vector<std::string> rest(tokens.begin() + 2, tokens.end());        // Tokens van af index 2 tot eind in een nieuwe vector zetten
-        objects.push_back(createObject(type, pos, rest, lineNum));              // Push waardes van createObject in de vector van objects zo dat deze gefilterd en getekend kunne worden
+            if (tokens.size() < 2)
+                throw ParseError(lineNum, "Incomplete line: '" + line + "'");
+
+            sf::Vector2f pos = parsePoint(tokens[0], lineNum);
+            std::string  type = tokens[1];
+            std::vector<std::string> rest(tokens.begin() + 2, tokens.end());        // Tokens van af index 2 tot eind in een nieuwe vector zetten
+            objects.push_back(createObject(type, pos, rest, lineNum));              // Push waardes van createObject in de vector van objects zo dat deze gefilterd en getekend kunne worden
+        }
+        catch (const ParseError& e) {
+            outHasError = true;
+            outErrorLog += std::string(e.what()) + "\n"; // Jouw mooie ParseError message
+        }
+        catch (const std::exception& e) {
+            outHasError = true;
+            outErrorLog += "Regel " + std::to_string(lineNum) + ": " + e.what() + "\n";
+        }
+
     }
-
-    if (file.bad())
-        throw std::runtime_error("Read error on file: '" + filename + "'");
 
     return objects;
 }
 
 void saveToFile(const std::string& filename,
-    const std::vector<std::unique_ptr<ScreenObject>>& objects)
+	const std::vector<std::unique_ptr<ScreenObject>>& objects) //Newwwww
 {
     std::ofstream file(filename);
     if (!file.is_open())
         throw std::runtime_error("Cannot write to file: '" + filename + "'");
+
     for (const auto& obj : objects)
         file << obj->serialize() << "\n";
+	printf("Saved  objects to ");
 }
