@@ -3,7 +3,7 @@
 #include <string>
 #include <stdexcept>
 
-struct ParseError : public std::runtime_error {
+struct ParseError : public std::runtime_error { // Documentatie run time error https://en.cppreference.com/w/cpp/error/runtime_error.html
     int line;
     ParseError(int ln, const std::string& msg)
         : std::runtime_error("Line " + std::to_string(ln) + ": " + msg), line(ln) {}

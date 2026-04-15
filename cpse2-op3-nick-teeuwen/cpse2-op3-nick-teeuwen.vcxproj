@@ -19,14 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Factory.hpp" />
-    <ClInclude Include="src\ScreenObjects.hpp" />
-    <ClInclude Include="src\Shape.hpp" />
+    <ClInclude Include="include\Circle.hpp" />
+    <ClInclude Include="include\Factory.hpp" />
+    <ClInclude Include="include\Line.hpp" />
+    <ClInclude Include="include\Picture.hpp" />
+    <ClInclude Include="include\Rectangle.hpp" />
+    <ClInclude Include="include\ScreenObjects.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Circle.cpp" />
     <ClCompile Include="src\Factory.cpp" />
+    <ClCompile Include="src\Line.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Shape.cpp" />
+    <ClCompile Include="src\Picture.cpp" />
+    <ClCompile Include="src\Rectangle.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -129,7 +135,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)src;C:/libs/SFML-2.5.1/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;C:/libs/SFML-2.5.1/include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

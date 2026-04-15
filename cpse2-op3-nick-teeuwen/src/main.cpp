@@ -7,7 +7,7 @@
 // Relatief pad: factory.txt staat naast de executable (gekopieerd door CMake)
 const std::string FILENAME = "../factory.txt";  
 const unsigned    WIN_W    = 1280;
-const unsigned    WIN_H    = 800; 
+const unsigned    WIN_H    = 960; 
 
 
 void showError(sf::RenderWindow& window, const sf::Font& font,
@@ -24,7 +24,7 @@ void showError(sf::RenderWindow& window, const sf::Font& font,
     window.draw(title);
 
     sf::Text msg;
-    msg.setFont(font);
+    msg.setFont(font); 
     msg.setString(message);
     msg.setCharacterSize(20);
     msg.setFillColor(sf::Color::White);

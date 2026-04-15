@@ -1,5 +1,9 @@
 #pragma once
-#include "Shape.hpp"
+
+#include "Circle.hpp"
+#include "Rectangle.hpp"
+#include "Line.hpp"
+#include "Picture.hpp"
 #include <fstream>
 #include <sstream>
 #include <vector>

@@ -1,4 +1,4 @@
-# CPSE2 - Opdracht B3 - Nick Teeuwen
+# CPSE2 - Opdracht B3 - Nick Teeuwen 1774888
 
 ## Project
 Factory Opdracht 3 — een SFML-applicatie die schermobjecten leest uit `factory.txt`,
@@ -26,7 +26,7 @@ Visual Studio 2022 project (SFML 2.5.1, C++17, MSVC, x64)
    Deze zijn te vinden in `SFML-2.5.1\bin\`
 
 5. Koppel SFML aan het project via **Project → Properties**:
-   - **C/C++ → General → Additional Include Directories:** `[pad naar SFML]\include`
+   - **C/C++ → General → Additional Include Directories:** `[pad naar SFML]\include` 
    - **Linker → General → Additional Library Directories:** `[pad naar SFML]\lib`
    - **Linker → Input → Additional Dependencies:** voeg toe:
      ```
@@ -46,7 +46,7 @@ Dubbelklik op `cpse2-op3-nick-teeuwen.exe` in `x64\Release\` of run vanuit Visua
 
 ## Configuratiebestand: `factory.txt`
 
-Elk object staat op een aparte regel. Lege regels en regels met `#` worden genegeerd.
+Elk object staat op een aparte regel. Lege regels wordt genegeerd.
 
 ```
 (x,y) CIRCLE kleur diameter
@@ -67,12 +67,7 @@ Elk object staat op een aparte regel. Lege regels en regels met `#` worden geneg
 (50,450) RECTANGLE white (450,500)
 ```
 
-Afbeeldingen (PNG) moeten naast `factory.txt` in de root van het project staanen altijd met ../ beginen
-
-**Voorbeeld**
-```
-(100,100) PICTURE ../Coin.png
-```
+Afbeeldingen (PNG) moeten in de `assest/` map in de root van het project staan
 
 ## Gebruik
 
