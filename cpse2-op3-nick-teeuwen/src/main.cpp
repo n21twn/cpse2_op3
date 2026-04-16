@@ -9,36 +9,6 @@ const unsigned    WIN_W = 1280; // Eigen beeld scherm is 2560x1440
 const unsigned    WIN_H = 960; // test voorbeeld is 1280x720 
 
 
-void showError(sf::RenderWindow& window, const sf::Font& font,
-                      const std::string& message)
-{
- 
-    sf::Text title;
-    title.setFont(font);
-    title.setString("Error loading factory.txt");
-    title.setCharacterSize(28);
-    title.setFillColor(sf::Color::Red);
-    title.setPosition(40.f, 40.f);
-    window.draw(title);
-
-    sf::Text msg;
-    msg.setFont(font); 
-    msg.setString(message);
-    msg.setCharacterSize(20);
-    msg.setFillColor(sf::Color::White);
-    msg.setPosition(40.f, 100.f);
-    window.draw(msg);
-
-    sf::Text hint;
-    hint.setFont(font);
-    hint.setString("Fix factory.txt and restart the application.");
-    hint.setCharacterSize(18);
-    hint.setFillColor(sf::Color(180, 180, 180));
-    hint.setPosition(40.f, (float)WIN_H - 60.f);
-    window.draw(hint);
-
-}
-
 int main() {
     // SFML 2: VideoMode neemt losse width/height ints
     sf::RenderWindow window(sf::VideoMode(WIN_W, WIN_H), "Factory Object Viewer");
@@ -140,6 +110,10 @@ int main() {
         window.clear(sf::Color(50, 50, 50));
 
         if (fileError) {
+
+			sf::RectangleShape errorBg(sf::Vector2f(float(window.getSize().x), float(window.getSize().y)));
+            errorBg.setFillColor(sf::Color(0, 0, 0, 180));
+            window.draw(errorBg);
             showError(window, font, errorMessage); //Newwwww
         }else {
             for (const auto& obj : objects)

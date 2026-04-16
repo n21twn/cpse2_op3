@@ -9,6 +9,21 @@ struct ParseError : public std::runtime_error { // Documentatie run time error h
         : std::runtime_error("Line " + std::to_string(ln) + ": " + msg), line(ln) {}
 };
 
+inline void showError(sf::RenderWindow& window, const sf::Font& font,
+    const std::string& message)
+{
+
+    sf::Text text;
+    text.setFont(font);
+    text.setString(message);
+    text.setCharacterSize(18);
+    text.setFillColor(sf::Color::Red);
+    text.setPosition(10.f, 10.f);
+    window.draw(text);
+
+    }
+
+
 inline sf::Color parseColor(const std::string& s, int lineNum) { // zet de string om naar een SFML kleur
     if (s == "black")   return sf::Color::Black;
     if (s == "white")   return sf::Color::White;

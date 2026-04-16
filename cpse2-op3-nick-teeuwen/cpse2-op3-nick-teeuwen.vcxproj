@@ -25,7 +25,7 @@
     <ClInclude Include="include\Picture.hpp" />
     <ClInclude Include="include\Rectangle.hpp" />
     <ClInclude Include="include\ScreenObjects.hpp" />
-    <ClInclude Include="Utils.hpp" />
+    <ClInclude Include="include\Utils.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Circle.cpp" />
@@ -34,6 +34,9 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Picture.cpp" />
     <ClCompile Include="src\Rectangle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\factory.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
