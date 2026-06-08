@@ -1,4 +1,4 @@
-#include "Line.hpp"
+#include <Line.hpp>
 
 //----------------------------------LINE----------------------------------
 Line::Line(sf::Vector2f pos, sf::Color color, sf::Vector2f pos2)

@@ -1,10 +1,12 @@
 #include <SFML/Graphics.hpp>
-#include "Factory.hpp"
+#include <Factory.hpp>
 #include <iostream>
 #include <vector>
 #include <string>
+//#include "factory.txt"
 
-const std::string FILENAME = "../factory.txt"; 
+
+const std::string FILENAME = "factory.txt"; 
 const unsigned    WIN_W = 1280; // Eigen beeld scherm is 2560x1440 
 const unsigned    WIN_H = 960; // test voorbeeld is 1280x720 
 
@@ -24,7 +26,6 @@ int main() {
     std::string errorMessage = "";
     bool fileError = false;
 	std::vector<std::unique_ptr<ScreenObject>> objects = loadFromFile(FILENAME, errorMessage, fileError); //Newwwww
-
    /* try {
         objects = loadFromFile(FILENAME);
     }

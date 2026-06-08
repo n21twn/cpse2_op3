@@ -1,4 +1,4 @@
-#include "Rectangle.hpp"
+#include <Rectangle.hpp>
 
 //----------------------------------RECTANGLE----------------------------------
 Rectangle::Rectangle(sf::Vector2f pos, sf::Color color, sf::Vector2f pos2)

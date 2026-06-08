@@ -1,10 +1,10 @@
-#include "Picture.hpp"
+#include <Picture.hpp>
 
 //----------------------------------PICTURE----------------------------------
 Picture::Picture(sf::Vector2f pos, const std::string& filename, int lineNum)
     : ScreenObject(pos, sf::Color::White), filename(filename)
 {
-	std::string path = "../assets/" + filename;  // Voeg "../assets/" toe aan het begin van de bestandsnaam om in de behorend map te komen
+	std::string path = "assets/" + filename;  // Voeg "../assets/" toe aan het begin van de bestandsnaam om in de behorend map te komen
     if (!texture.loadFromFile(path))
         throw ParseError(lineNum, "Cannot load image file: '" + path + "'");
     sprite.setTexture(texture);
