@@ -58,7 +58,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\factory.txt">
+    <Text Include="factory.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

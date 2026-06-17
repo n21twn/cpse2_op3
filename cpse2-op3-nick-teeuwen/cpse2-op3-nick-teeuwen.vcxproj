@@ -36,7 +36,7 @@
     <ClCompile Include="src\Rectangle.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\factory.txt" />
+    <Text Include="factory.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

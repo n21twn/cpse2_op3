@@ -47,8 +47,14 @@ int main() {
             // window sluiten
             if (event.type == sf::Event::Closed) {
                 if (!fileError) {
-
-                    saveToFile(FILENAME, objects);
+                    try {
+                        saveToFile(FILENAME, objects);
+                    }
+                    catch (const FileError& e) {
+                        std::cerr << "ERROR: " << e.what() << "\n";
+                        // Bestand kon niet opgeslagen worden; sluit alsnog af,
+                        // de eerdere factory.txt blijft daardoor onveranderd.
+                    }
                 }
                 window.close();
             }
